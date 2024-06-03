@@ -5,13 +5,10 @@ on:
   push:
     branches: [main]
 env:
-  AWS_ACCESS_KEY_ID: ${{ secrets.TERRATEST_AWS_ACCESS_KEY_ID }}
-  AWS_SECRET_KEY: ${{ secrets.TERRATEST_AWS_SECRET_ACCESS_KEY }}
-  AWS_DEFAULT_REGION: ${{ secrets.TERRATEST_AWS_REGION }}
-  AWS_REGION: ${{ secrets.TERRATEST_AWS_REGION }}
-  TF_VAR_databricks_account_username: ${{ secrets.DATABRICKS_ACCOUNT_USERNAME }}
-  TF_VAR_databricks_account_password: ${{ secrets.DATABRICKS_ACCOUNT_PASSWORD }}
-  TF_VAR_databricks_account_id: ${{ secrets.DATABRICKS_ACCOUNT_ID }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  AWS_DEFAULT_REGION: "us-east-1"
+  AWS_REGION: "us-east-1"
 jobs:
   terratest:
     name: terratest
