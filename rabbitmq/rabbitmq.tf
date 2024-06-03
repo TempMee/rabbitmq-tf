@@ -12,8 +12,8 @@ resource "aws_security_group" "rabbitmq" {
   }
 }
 
-#checkov:skip=CKV_AWS_208: Already latest
 resource "aws_mq_configuration" "main" {
+  #checkov:skip=CKV_AWS_208: Already latest
   description    = "Main RabbitMQ configuration"
   name           = "rabbitmq-configuration"
   engine_type    = "RabbitMQ"
