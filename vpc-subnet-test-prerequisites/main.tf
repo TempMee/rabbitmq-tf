@@ -33,7 +33,7 @@ resource "aws_vpc" "main" {
   enable_dns_hostnames = true
 
   tags = {
-    Name = "honest-databricks"
+    Name = "test-vpc"
   }
 }
 
@@ -42,7 +42,7 @@ module "subnet" {
   source            = "../modules/terraform-aws-subnet/aws-subnet"
   subnet_cidr_block = var.private_subnet_cidrs[count.index]
   vpc_id            = aws_vpc.main.id
-  subnet_name       = "honest-subnet-databricks-${count.index}"
+  subnet_name       = "test-subnet-${count.index}"
   subnet_tags       = {}
   depends_on        = [aws_vpc.main]
   subnet_az         = local.availability_zones[count.index]
@@ -52,7 +52,7 @@ module "public_subnet" {
   source            = "../modules/terraform-aws-subnet/aws-subnet"
   subnet_cidr_block = var.public_subnet_cidr
   vpc_id            = aws_vpc.main.id
-  subnet_name       = "honest-subnet-databricks-public"
+  subnet_name       = "test-subnet-public"
   subnet_tags       = {}
   depends_on        = [aws_vpc.main]
 }
@@ -63,6 +63,10 @@ output "private_subnet_ids" {
 
 output "public_subnet_id" {
   value = module.public_subnet.aws_subnet_id
+}
+
+output "private_subnet_cidrs" {
+  value = var.private_subnet_cidrs
 }
 
 output "vpc_id" {
