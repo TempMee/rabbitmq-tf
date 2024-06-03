@@ -14,7 +14,6 @@ provider "aws" {
 
 }
 
-#chekov:skip=CKV_AWS_208: "skip this check"
 module "rabbitmq" {
   source        = "./rabbitmq"
   subnet_cidrs  = var.private_subnet_cidrs
