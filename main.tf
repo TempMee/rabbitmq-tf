@@ -16,13 +16,13 @@ provider "aws" {
 
 
 module "rabbitmq" {
-  #checkov:skip=CKV_SECRET_6: "Not a secret"
   source        = "./rabbitmq"
   subnet_cidrs  = var.private_subnet_cidrs
   subnet_ids    = var.private_subnet_ids
   name          = "rabbitmq"
   instance_size = "mq.t3.micro"
   username      = "ExampleUser"
+  #checkov:skip=CKV_SECRET_6: "Not a secret"
   password      = "MindTheGap123"
   vpc_id        = var.vpc_id
 }
