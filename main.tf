@@ -23,8 +23,8 @@ module "rabbitmq" {
   instance_size = "mq.t3.micro"
   username      = "ExampleUser"
   #checkov:skip=CKV_SECRET_6: "Not a secret"
-  password      = "MindTheGap123"
-  vpc_id        = var.vpc_id
+  password = "MindTheGap123"
+  vpc_id   = var.vpc_id
 }
 
 output "rabbitmq_id" {
