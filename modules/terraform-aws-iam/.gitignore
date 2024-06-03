@@ -167,8 +167,8 @@ Temporary Items
 
 # ###################################################################################
 # Ignore the dependency lock file. Both in root and in modules (for cases where modules are being tested as standalone code).
-# 
-# The dependency lock file is created (or updated if existing) when terraform init is ran. 
+#
+# The dependency lock file is created (or updated if existing) when terraform init is ran.
 # The dependency lock file has utility in providing information into potential changes to the external dependencies, and as such can be checked via code review.
 #
 # Added in here as commented, as it's best practice according to hashicorp to include, however, if we do not plan to review dependencies, it could be ignored.

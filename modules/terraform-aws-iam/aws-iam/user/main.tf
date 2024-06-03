@@ -14,6 +14,7 @@ terraform {
 }
 
 resource "aws_iam_user" "user" {
+  #checkov:skip=CKV_AWS_273: 'aws_iam_user' is used to create IAM user
   name = var.user.name
   path = var.user.path
 

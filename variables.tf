@@ -1,6 +1,6 @@
 variable "private_subnet_cidrs" {
-    description = "Private Subnet CIDRs used for databricks to know where to deploy ec2 instances"
-    type        = set(string)
+  description = "Private Subnet CIDRs used for databricks to know where to deploy ec2 instances"
+  type        = set(string)
 
 }
 

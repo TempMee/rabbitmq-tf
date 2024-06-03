@@ -1,9 +1,9 @@
 variable "user" {
   description = "The user to create"
   type = object({
-    name = string
-    path = string
-    tags = map(any)
+    name   = string
+    path   = string
+    tags   = map(any)
     groups = list(string) # group names
   })
   default = null
@@ -12,9 +12,9 @@ variable "user" {
 variable "role" {
   description = "The role to create"
   type = object({
-    name = string
-    path = string
-    tags = map(any)
+    name     = string
+    path     = string
+    tags     = map(any)
     policies = list(string) # policy names
   })
   default = null
@@ -34,8 +34,8 @@ variable "policy" {
 variable "group" {
   description = "Name and path of group"
   type = object({
-    name  = string
-    path  = string
+    name     = string
+    path     = string
     policies = list(string) # policy arns
   })
   default = null

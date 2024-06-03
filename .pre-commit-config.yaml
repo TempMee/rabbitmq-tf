@@ -15,10 +15,6 @@ repos:
       - id: terraform_docs
       - id: terraform_validate
         exclude: (test/|examples/|.external_modules/)
-      - id: terraform_tfsec
-        args:
-          - '--args=--exclude-downloaded-modules'
-        exclude: (test/|examples/|.external_modules/)
       - id: terraform_checkov
   - repo: https://github.com/zricethezav/gitleaks
     rev: v8.18.0

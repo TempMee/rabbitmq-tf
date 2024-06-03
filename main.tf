@@ -16,6 +16,7 @@ provider "aws" {
 
 
 module "rabbitmq" {
+  #checkov:skip=CKV_SECRET_6: "Not a secret"
   source        = "./rabbitmq"
   subnet_cidrs  = var.private_subnet_cidrs
   subnet_ids    = var.private_subnet_ids
@@ -35,6 +36,5 @@ output "rabbitmq_endpoint" {
 }
 
 output "rabbitmq_arn" {
-    value = module.rabbitmq.broker_arn
+  value = module.rabbitmq.broker_arn
 }
-
