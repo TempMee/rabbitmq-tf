@@ -1,16 +1,3 @@
-resource "aws_security_group" "rabbitmq" {
-  name        = var.name
-  vpc_id      = var.vpc_id
-  description = "Allow inbound traffic on port 5672 for RabbitMQ"
-
-  ingress {
-    from_port   = 5671
-    to_port     = 5672
-    protocol    = "tcp"
-    cidr_blocks = var.subnet_cidrs
-    description = "Allow RabbitMQ traffic"
-  }
-}
 
 resource "aws_mq_configuration" "main" {
   #checkov:skip=CKV_AWS_208: Already latest
@@ -41,7 +28,7 @@ resource "aws_mq_broker" "main" {
   engine_version             = "3.12.13"
   storage_type               = "ebs"
   host_instance_type         = var.instance_size
-  security_groups            = [aws_security_group.rabbitmq.id]
+  security_groups            = var.security_group_ids
   publicly_accessible        = false
   auto_minor_version_upgrade = true
 
