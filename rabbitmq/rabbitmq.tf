@@ -1,5 +1,5 @@
 resource "aws_security_group" "rabbitmq" {
-  name        = "rabbitmq"
+  name        = var.name
   vpc_id      = var.vpc_id
   description = "Allow inbound traffic on port 5672 for RabbitMQ"
 
