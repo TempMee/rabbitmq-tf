@@ -24,6 +24,7 @@ data "aws_vpc" "main" {
   id = var.vpc_id
 }
 
+#checkov:skip=CKV2_AWS_5: "dummy security group"
 resource "aws_security_group" "rabbitmq" {
   name        = "test-sg-rabbitmq"
   vpc_id      = var.vpc_id
