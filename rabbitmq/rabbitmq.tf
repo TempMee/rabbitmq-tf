@@ -28,13 +28,13 @@ DATA
 #tfsec:ignore:aws-mq-enable-general-logging
 #tfsec:ignore:aws-mq-enable-audit-logging
 resource "aws_mq_broker" "main" {
+  #checkov:skip=CKV_AWS_208: Already latest
   #checkov:skip=CKV_AWS_209: no need for encryption
   #checkov:skip=CKV_AWS_48: no need for logging
   broker_name = var.name
 
   configuration {
-    id       = aws_mq_configuration.main.id
-    revision = aws_mq_configuration.main.latest_revision
+    id = aws_mq_configuration.main.id
   }
 
   engine_type                = "RabbitMQ"
