@@ -34,7 +34,7 @@ resource "aws_security_group" "rabbitmq" {
     from_port   = 5671
     to_port     = 5672
     protocol    = "tcp"
-    cidr_blocks = data.aws_vpc.main.cidr_block
+    cidr_blocks = [data.aws_vpc.main.cidr_block]
     description = "Allow RabbitMQ traffic"
   }
 }
