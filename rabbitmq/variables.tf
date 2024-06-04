@@ -52,3 +52,9 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "security_group_ids" {
+  description = "Security group IDs"
+  type        = list(string)
+  default     = []
+}
