@@ -46,3 +46,9 @@ variable "vpc_id" {
   description = "VPC ID"
   type        = string
 }
+
+variable "tags" {
+  description = "Tags for the RabbitMQ cluster"
+  type        = map(string)
+  default     = {}
+}

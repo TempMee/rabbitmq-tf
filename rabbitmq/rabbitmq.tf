@@ -51,7 +51,7 @@ resource "aws_mq_broker" "main" {
     password = var.password
   }
 
-  tags = {
+  tags = merge(var.tags, {
     Terraform = "true"
-  }
+  })
 }
