@@ -140,7 +140,7 @@ func TestTerraformCodeInfrastructureInitialCredentials(t *testing.T) {
 		TerraformDir: terraformTempDir,
 	}
 	terraform.Validate(t, terraformValidateOptions)
-	plan, errApplyingIdempotent := terraform.ApplyAndIdempotentE(t, terraformInitOptions)
+	plan, errApplyingIdempotent := terraform.ApplyE(t, terraformInitOptions)
 	if errApplyingIdempotent != nil {
 		t.Logf("Error applying plan: %v", errApplyingIdempotent)
 		t.Fail()
