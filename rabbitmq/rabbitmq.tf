@@ -4,7 +4,7 @@ resource "aws_security_group" "rabbitmq" {
   description = "Allow inbound traffic on port 5672 for RabbitMQ"
 
   ingress {
-    from_port   = 5672
+    from_port   = 5671
     to_port     = 5672
     protocol    = "tcp"
     cidr_blocks = var.subnet_cidrs
