@@ -1,26 +1,20 @@
-variable "environment" {
-  description = "Environment"
+variable "private_subnet_cidrs" {
+  description = "Private Subnet CIDRs used for databricks to know where to deploy ec2 instances"
+  type        = set(string)
+
+}
+
+variable "private_subnet_ids" {
+  description = "Private Subnet IDs used for databricks to know where to deploy ec2 instances"
+  type        = set(string)
+}
+
+variable "public_subnet_id" {
+  description = "Public Subnet ID used for creating igw"
   type        = string
 }
 
-variable "aws_access_key" {
-  description = "AWS access key"
-  type        = string
-}
-
-variable "aws_secret_key" {
-  description = "AWS secret key"
-  type        = string
-}
-
-variable "aws_token" {
-  description = "AWS token"
-  type        = string
-  default     = ""
-}
-
-variable "aws_region" {
-  description = "AWS region"
-  type        = string
-  default     = "us-east-1"
+variable "vpc_id" {
+  description = "VPC ID"
+  default     = null
 }

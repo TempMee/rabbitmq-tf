@@ -9,3 +9,4 @@ quiet: true
 skip-path:
   - .external_modules
   - modules
+  - vpc-subnet-test-prerequisites
