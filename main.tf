@@ -20,13 +20,18 @@ resource "random_password" "rabbitmq_password" {
   override_special = "!@#$%^&*()_+"
 }
 
+resource "random_string" "rabbitmq_name" {
+  length  = 5
+  special = false
+}
+
 data "aws_vpc" "main" {
   id = var.vpc_id
 }
 
-#checkov:skip=CKV2_AWS_5: "dummy security group"
 resource "aws_security_group" "rabbitmq" {
-  name        = "test-sg-rabbitmq"
+  #checkov:skip=CKV2_AWS_5: "dummy security group"
+  name        = "test-sg-rabbitmq-${random_string.rabbitmq_name.result}"
   vpc_id      = var.vpc_id
   description = "Allow inbound traffic on port 5672 for RabbitMQ"
 
@@ -43,7 +48,7 @@ module "rabbitmq" {
   source        = "./rabbitmq"
   subnet_cidrs  = var.private_subnet_cidrs
   subnet_ids    = var.private_subnet_ids
-  name          = "rabbitmq"
+  name          = "rabbitmq-test-${random_string.rabbitmq_name.result}"
   instance_size = "mq.t3.micro"
   username      = "ExampleUser"
   #checkov:skip=CKV_SECRET_6: "Not a secret"
