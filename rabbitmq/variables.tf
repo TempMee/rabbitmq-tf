@@ -58,3 +58,20 @@ variable "security_group_ids" {
   type        = list(string)
   default     = []
 }
+
+variable "type" {
+  description = "Type of the RabbitMQ cluster"
+  type        = string
+  default     = "single-node"
+  validation {
+    condition     = contains(["single-node", "cluster"], var.type)
+    error_message = "Invalid type"
+  }
+}
+
+variable "nodes" {
+  description = "Number of nodes in the RabbitMQ cluster"
+  type        = number
+  default     = 1
+
+}

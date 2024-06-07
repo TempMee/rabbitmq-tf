@@ -20,6 +20,7 @@ Terraform repo template
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_rabbitmq"></a> [rabbitmq](#module\_rabbitmq) | ./rabbitmq | n/a |
+| <a name="module_rabbitmq2"></a> [rabbitmq2](#module\_rabbitmq2) | ./rabbitmq | n/a |
 
 ## Resources
 
@@ -43,6 +44,9 @@ Terraform repo template
 
 | Name | Description |
 |------|-------------|
+| <a name="output_rabbitmq2_arn"></a> [rabbitmq2\_arn](#output\_rabbitmq2\_arn) | n/a |
+| <a name="output_rabbitmq2_endpoint"></a> [rabbitmq2\_endpoint](#output\_rabbitmq2\_endpoint) | n/a |
+| <a name="output_rabbitmq2_id"></a> [rabbitmq2\_id](#output\_rabbitmq2\_id) | n/a |
 | <a name="output_rabbitmq_arn"></a> [rabbitmq\_arn](#output\_rabbitmq\_arn) | n/a |
 | <a name="output_rabbitmq_endpoint"></a> [rabbitmq\_endpoint](#output\_rabbitmq\_endpoint) | n/a |
 | <a name="output_rabbitmq_id"></a> [rabbitmq\_id](#output\_rabbitmq\_id) | n/a |
