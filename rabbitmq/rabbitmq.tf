@@ -66,7 +66,7 @@ resource "aws_mq_broker" "node" {
   auto_minor_version_upgrade = true
   deployment_mode            = "CLUSTER_MULTI_AZ"
 
-  data_replication_mode               = "CRDR"
+  data_replication_mode               = "NONE"
   data_replication_primary_broker_arn = aws_mq_broker.main.arn
 
   subnet_ids = var.subnet_ids
