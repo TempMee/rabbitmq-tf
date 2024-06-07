@@ -75,7 +75,7 @@ module "rabbitmq2" {
   subnet_cidrs  = var.private_subnet_cidrs
   subnet_ids    = var.private_subnet_ids
   name          = "rabbitmq-test-${random_string.rabbitmq_name.result}-cluster"
-  instance_size = "mq.t3.micro"
+  instance_size = "mq.m5.large"
   username      = "ExampleUser"
   #checkov:skip=CKV_SECRET_6: "Not a secret"
   password           = random_password.rabbitmq_password.result

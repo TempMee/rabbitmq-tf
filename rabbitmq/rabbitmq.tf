@@ -33,7 +33,7 @@ resource "aws_mq_broker" "main" {
   auto_minor_version_upgrade = true
   deployment_mode            = var.type == "single-node" ? "SINGLE_INSTANCE" : "CLUSTER_MULTI_AZ"
 
-  subnet_ids = [var.subnet_ids[0]]
+  subnet_ids = var.subnet_ids
   user {
     username = var.username
     password = var.password
