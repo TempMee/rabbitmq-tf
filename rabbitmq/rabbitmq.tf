@@ -1,4 +1,3 @@
-
 resource "aws_mq_configuration" "main" {
   #checkov:skip=CKV_AWS_208: Already latest
   description    = "Main RabbitMQ configuration"
@@ -33,7 +32,7 @@ resource "aws_mq_broker" "main" {
   auto_minor_version_upgrade = true
   deployment_mode            = var.type == "single-node" ? "SINGLE_INSTANCE" : "CLUSTER_MULTI_AZ"
 
-  subnet_ids = var.subnet_ids
+  subnet_ids = var.type == "single-node" ? [var.subnet_ids[0]] : var.subnet_ids
   user {
     username = var.username
     password = var.password
@@ -70,6 +69,7 @@ resource "aws_mq_broker" "node" {
   data_replication_mode               = "CRDR"
   data_replication_primary_broker_arn = aws_mq_broker.main.arn
 
+  subnet_ids = var.subnet_ids
   user {
     username = var.username
     password = var.password
