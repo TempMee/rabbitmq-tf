@@ -31,7 +31,7 @@ resource "aws_mq_broker" "main" {
   security_groups            = var.security_group_ids
   publicly_accessible        = false
   auto_minor_version_upgrade = true
-  deployment_mode            = var.type == "single-node" ? "SINGLE_INSTANCE" : "ACTIVE_STANDBY_MULTI_AZ"
+  deployment_mode            = var.type == "single-node" ? "SINGLE_INSTANCE" : "CLUSTER_MULTI_AZ"
 
   subnet_ids = [var.subnet_ids[0]]
   user {
@@ -65,7 +65,7 @@ resource "aws_mq_broker" "node" {
   security_groups            = var.security_group_ids
   publicly_accessible        = false
   auto_minor_version_upgrade = true
-  deployment_mode            = "ACTIVE_STANDBY_MULTI_AZ"
+  deployment_mode            = "CLUSTER_MULTI_AZ"
 
   data_replication_mode               = "CRDR"
   data_replication_primary_broker_arn = aws_mq_broker.main.arn
