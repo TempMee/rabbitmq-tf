@@ -151,6 +151,9 @@ func TestTerraformCodeInfrastructureInitialCredentials(t *testing.T) {
 	rabbitmqId := terraform.Output(t, terraformInitOptions, "rabbitmq_id")
 	rabbitmqEndpoint := terraform.Output(t, terraformInitOptions, "rabbitmq_endpoint")
 	rabbitmqARN := terraform.Output(t, terraformInitOptions, "rabbitmq_arn")
+	rabbitmq2Id := terraform.Output(t, terraformInitOptions, "rabbitmq2_id")
+	rabbitmq2Endpoint := terraform.Output(t, terraformInitOptions, "rabbitmq2_endpoint")
+	rabbitmq2ARN := terraform.Output(t, terraformInitOptions, "rabbitmq2_arn")
 
 	cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion("us-east-1"))
 	if err != nil {
@@ -158,7 +161,7 @@ func TestTerraformCodeInfrastructureInitialCredentials(t *testing.T) {
 	}
 	client := mq.NewFromConfig(cfg)
 	// client := ec2.NewFromConfig(cfg)
-	t.Run("Has Infra", func(t *testing.T) {
+	t.Run("Has Infra single node", func(t *testing.T) {
 		a := assert.New(t)
 		// check that rabbitmq exists as a resource
 		t.Log("Checking that rabbitmq exists as a resource")
@@ -177,6 +180,27 @@ func TestTerraformCodeInfrastructureInitialCredentials(t *testing.T) {
 		t.Log(rabbitmq.BrokerInstances[0].Endpoints)
 		a.Equal(rabbitmqARN, *rabbitmq.BrokerArn)
 		a.Equal(rabbitmqEndpoint, rabbitmq.BrokerInstances[0].Endpoints[0])
+	})
+
+	t.Run("Has Infra cluster", func(t *testing.T) {
+		a := assert.New(t)
+		// check that rabbitmq exists as a resource
+		t.Log("Checking that rabbitmq exists as a resource")
+		t.Log(rabbitmq2Id)
+
+		rabbitmq, err := client.DescribeBroker(context.TODO(), &mq.DescribeBrokerInput{
+			BrokerId: aws.String(rabbitmq2Id),
+		})
+		t.Log(err)
+		a.NoError(err)
+		a.NotEmpty(rabbitmq)
+		if rabbitmq == nil {
+			t.Fail()
+			return
+		}
+		t.Log(rabbitmq.BrokerInstances[0].Endpoints)
+		a.Equal(rabbitmq2ARN, *rabbitmq.BrokerArn)
+		a.Equal(rabbitmq2Endpoint, rabbitmq.BrokerInstances[0].Endpoints[0])
 	})
 
 }

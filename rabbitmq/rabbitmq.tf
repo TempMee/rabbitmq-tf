@@ -1,4 +1,3 @@
-
 resource "aws_mq_configuration" "main" {
   #checkov:skip=CKV_AWS_208: Already latest
   description    = "Main RabbitMQ configuration"
@@ -31,8 +30,9 @@ resource "aws_mq_broker" "main" {
   security_groups            = var.security_group_ids
   publicly_accessible        = false
   auto_minor_version_upgrade = true
+  deployment_mode            = var.type == "single-node" ? "SINGLE_INSTANCE" : "CLUSTER_MULTI_AZ"
 
-  subnet_ids = [var.subnet_ids[0]]
+  subnet_ids = var.type == "single-node" ? [var.subnet_ids[0]] : var.subnet_ids
   user {
     username = var.username
     password = var.password

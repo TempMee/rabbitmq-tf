@@ -55,6 +55,7 @@ module "rabbitmq" {
   password           = random_password.rabbitmq_password.result
   vpc_id             = var.vpc_id
   security_group_ids = [aws_security_group.rabbitmq.id]
+  type               = "single-node"
 }
 
 output "rabbitmq_id" {
@@ -67,4 +68,30 @@ output "rabbitmq_endpoint" {
 
 output "rabbitmq_arn" {
   value = module.rabbitmq.broker_arn
+}
+
+module "rabbitmq2" {
+  source        = "./rabbitmq"
+  subnet_cidrs  = var.private_subnet_cidrs
+  subnet_ids    = var.private_subnet_ids
+  name          = "rabbitmq-test-${random_string.rabbitmq_name.result}-cluster"
+  instance_size = "mq.m5.large"
+  username      = "ExampleUser"
+  #checkov:skip=CKV_SECRET_6: "Not a secret"
+  password           = random_password.rabbitmq_password.result
+  vpc_id             = var.vpc_id
+  security_group_ids = [aws_security_group.rabbitmq.id]
+  type               = "cluster"
+}
+
+output "rabbitmq2_id" {
+  value = module.rabbitmq2.broker_id
+}
+
+output "rabbitmq2_endpoint" {
+  value = module.rabbitmq2.broker_endpoint
+}
+
+output "rabbitmq2_arn" {
+  value = module.rabbitmq2.broker_arn
 }
