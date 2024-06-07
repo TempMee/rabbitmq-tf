@@ -82,7 +82,6 @@ module "rabbitmq2" {
   vpc_id             = var.vpc_id
   security_group_ids = [aws_security_group.rabbitmq.id]
   type               = "cluster"
-  nodes              = 2
 }
 
 output "rabbitmq2_id" {

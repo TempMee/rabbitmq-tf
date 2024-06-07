@@ -1,6 +1,40 @@
 # terraform-template
 Terraform repo template
 
+
+## Usage
+```hcl
+# single instance
+module "rabbitmq" {
+  source        = "./rabbitmq"
+  subnet_cidrs  = var.private_subnet_cidrs
+  subnet_ids    = var.private_subnet_ids
+  name          = "rabbitmq-test-${random_string.rabbitmq_name.result}"
+  instance_size = "mq.t3.micro"
+  username      = "ExampleUser"
+  #checkov:skip=CKV_SECRET_6: "Not a secret"
+  password           = random_password.rabbitmq_password.result
+  vpc_id             = var.vpc_id
+  security_group_ids = [aws_security_group.rabbitmq.id]
+  type               = "single-node"
+}
+```
+```hcl
+# cluster instance
+module "rabbitmq2" {
+  source        = "./rabbitmq"
+  subnet_cidrs  = var.private_subnet_cidrs
+  subnet_ids    = var.private_subnet_ids
+  name          = "rabbitmq-test-${random_string.rabbitmq_name.result}-cluster"
+  instance_size = "mq.m5.large"
+  username      = "ExampleUser"
+  #checkov:skip=CKV_SECRET_6: "Not a secret"
+  password           = random_password.rabbitmq_password.result
+  vpc_id             = var.vpc_id
+  security_group_ids = [aws_security_group.rabbitmq.id]
+  type               = "cluster"
+}
+```
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 

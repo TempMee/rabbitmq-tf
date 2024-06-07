@@ -68,10 +68,3 @@ variable "type" {
     error_message = "Invalid type"
   }
 }
-
-variable "nodes" {
-  description = "Number of nodes in the RabbitMQ cluster"
-  type        = number
-  default     = 1
-
-}
